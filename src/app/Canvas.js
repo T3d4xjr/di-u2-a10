@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Background from './Background.js';
 import Box from './Box.js';
+//parte de como hacerlo con immer
+/**import {use-immer} frm 'immer' */
 
 const initialPosition = {
   x: 0,
@@ -8,17 +10,40 @@ const initialPosition = {
 };
 
 export default function Canvas() {
+  /** const [shape, updateShape] useImmer({
+   * color: 'orange',
+    position: initialPosition
+  }) */
   const [shape, setShape] = useState({
     color: 'orange',
     position: initialPosition
   });
 
   function handleMove(dx, dy) {
-    shape.position.x += dx;
-    shape.position.y += dy;
+    
+    setShape({
+      ...shape,
+      position:{
+        x:shape.position.x += dx,
+        y:shape.position.y += dy,
+      }
+    });
+    
+
+    // parte de codigo con immer
+    /**updateShape(draft=>{
+     * draft.position.x += dx,
+     * draft.position.y += dy,
+    }) */
+    
   }
 
   function handleColorChange(e) {
+
+    // parte de codigo con immer
+    /**updateShape(draft=>{
+     * draft.color=e.target.value,
+    }) */
     setShape({
       ...shape,
       color: e.target.value
